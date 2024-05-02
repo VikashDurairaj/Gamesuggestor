@@ -1,0 +1,412 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Child Activity</title>
+    <style>
+        /* Add any desired CSS styling here */
+        body {
+            font-family: 'georgia';
+            background-color:	#edeff3;
+            background-size: cover;
+            background-position: center;
+            background-attachment: fixed;
+            text-align: center;
+            margin: 0;
+            padding: 0;
+        }
+
+        nav {
+            background-color:#0056b3;
+            font-size: 18px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 0px;
+            padding-left: 60px;
+        }
+
+        nav ul {
+            list-style-type: none;
+            padding: 35px 0;
+            margin: 0;
+            display: flex; /* Use flexbox to create a horizontal layout */
+        }
+
+        nav ul li {
+            margin: 0 25px; /* Adjust spacing between links */
+            border-radius: 0px; /* Add rounded corners */
+            background-color: blue;
+        }
+
+        nav ul li:last-child {
+            margin-right: 0;
+            margin-left: 900px;
+        }
+
+        nav ul li a {
+            color: white;
+            padding: 50px 10px;
+            border-radius: 5px;
+			text-decoration: none;
+        }
+		nav ul li a:hover {
+    text-decoration: none; /* Remove underline on hover */
+}
+
+        .logo {
+            position: absolute;
+            top: 7px; /* Adjust position as needed */
+            left: 0px; /* Adjust position as needed */
+            width: 75px; /* Adjust size as needed */
+            margin-left: 0px;
+        }
+
+        .logo img {
+            width: 95px;
+            height: 95px;
+            border-radius: 100px;
+        }
+
+        .container {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            flex-direction: column;
+            height: 100vh;
+        }
+
+        h1 {
+            color: black;
+        }
+
+        form {
+            display: center;
+            flex-direction: column;
+            align-items: flex-start;
+            max-width: 400px;
+            padding: 25px;
+            background-color: rgba(255, 255, 255, 0.8); /* Adjust the opacity as needed */
+            border-radius: 8px;
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+            margin-bottom: 20px;
+        }
+
+        label {
+            width: 380px;
+            margin-bottom: 10px;
+            text-align: left;
+        }
+
+        input, select {
+            width: 380px; /* Adjusted width */
+            padding: 10px;
+            margin-bottom: 20px;
+            border: 1px solid #ccc;
+            border-radius: 4px;
+            box-sizing: border-box;
+        }
+
+        button {
+            background-color: #0056b3;
+            color: #fff;
+            border: none;
+            padding: 10px 20px;
+            border-radius: 4px;
+            cursor: pointer;
+        }
+
+        button:hover {
+            background-color: #0056b3;
+        }
+
+        .app-grid {
+            display: flex;
+            justify-content: center;
+            flex-wrap: wrap;
+            margin-top: 20px;
+        }
+
+        .app-link {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            padding: 20px;
+            background-color:  #0056b3; /* Changed background color */
+            color: #0056b3; /* Changed text color */
+            text-decoration: none;
+            border-radius: 8px;
+            transition: background-color 0.3s ease;
+            margin-right: 20px;
+            margin-bottom: 20px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); /* Added box shadow */
+            width: 100px; /* Adjust width as needed */
+            height: 100px; /* Adjust height as needed */
+        }
+
+        .app-link:hover {
+            background-color: #0056b3;
+            color: #fff;
+        }
+
+        .app-link img {
+            width: 96px; /* Adjust icon size */
+            height: 96px; /* Adjust icon size */
+            margin-right: 0px;
+        }
+    </style>
+</head>
+<body>
+
+<nav>
+    <ul>
+        <li style="margin-right: auto;background-color:green;"><a href="file:///C:/Users/ADMIN/Documents/mainproject%20idea.html">Back to Login</a></li>
+        <li style="margin-right: auto;background-color:green;"id="suggestionsNavItem"><a id="suggestionsLink" href="#">Suggestions</a></li>
+        <li style="margin-right: auto;background-color:green;"><a id="AboutusLink" href="#">About Us</a></li>
+    </ul>
+</nav>
+<div class="container">
+    <h1> Games </h1>
+    <form id="childForm">
+        <label for="childAge"> Age</label>
+        <br><br>
+        <input type="number" placeholder="Enter Age from 3 to 17" id="childAge" min="3" max="17" required>
+        <label for="childGender"> Gender</label>
+        <br><br>
+        <select id="childGender">
+            <option value="Select" hidden>Select</option>
+            <option value="male">Male</option>
+            <option value="female">Female</option>
+        </select>
+        <button type="button" onclick="checkActivity()">Check Games</button>
+    </form>
+    <div class="app-grid" id="appLinks">
+        <!-- App links will be dynamically generated here -->
+    </div>
+    <img src="222.png" alt="Logo" class="logo">
+    <p id="activityResult"></p>
+</div>
+
+<script>
+    function checkActivity() {
+        // Clear previous app links
+        document.getElementById("appLinks").innerHTML = "";
+
+        // Get the child's age and gender
+        const childAge = parseInt(document.getElementById("childAge").value);
+        const childGender = document.getElementById("childGender").value;
+
+        // Define app URLs and icons based on age and gender
+        const appData = {
+            male: {
+                3: [
+                        { url: "https://play.google.com/store/apps/details?id=com.rvappstudios.abc_kids_toddler_tracing_phonics&hl=en_IN&gl=US", icon: "icon.png" },
+                        { url: "https://play.google.com/store/apps/details?id=com.rvappstudios.baby.toddler.kids.games.learning.activity&hl=en_IN&gl=US", icon: "icon2.png" },
+                        { url: "https://play.google.com/store/apps/details?id=com.rvappstudios.toddler.preschool.kids.learning.games&hl=en_IN&gl=US", icon: "icon3.png" },
+                        { url: "https://play.google.com/store/apps/details?id=com.iz.games.preschool.game.kindergarten.baby.children.kids.learning.educational.learn.toddler.puzzles.stories.coloring&hl=en_IN&gl=US", icon: "icon4.png" }
+                    ],
+                  
+					4:[
+					{ url:"https://play.google.com/store/apps/details?id=com.amayasoft.toddler.learning.baby.games&hl=en_IN&gl=US",icon:"icon8.png"},
+					{ url:"https://play.google.com/store/apps/details?id=com.amayasoft.toddler.kids.games.boys.girls.shapes&hl=en_IN&gl=US",icon:"icon9.png"},
+					{ url:"https://play.google.com/store/apps/details?id=com.edujoy.Visual_Games&hl=en_IN&gl=US",icon:"icon30.png"}
+					
+			        ], 
+			        5: [
+                        { url: "https://play.google.com/store/apps/details?id=com.rvappstudios.math.kids.counting&hl=en_IN&gl=US", icon: "icon5.png" },
+                        { url: "https://play.google.com/store/apps/details?id=com.rvappstudios.sight.words.phonics.reading.kids.games&hl=en_IN&gl=US", icon: "icon6.png" },
+                        { url: "https://play.google.com/store/apps/details?id=com.rvappstudios.abc.spelling.toddler.spell.phonics", icon: "icon7.png" }
+                    ],
+			        6:[
+			        { url:"https://play.google.com/store/apps/details?id=com.orange.memory.game.learn.kids&hl=en_IN&gl=US",icon:"icon13.png"},
+			        { url:"https://play.google.com/store/apps/details?id=com.orange.memory.game.learn.kids&hl=en_IN&gl=US",icon:"icon14.png"},
+			        { url:"https://play.google.com/store/apps/details?id=com.dmaximo.learningbeesfree&hl=en_IN&gl=US",icon:"icon15.png"}
+					
+			         ],
+					 
+			        7:[
+			        { url:"https://play.google.com/store/apps/details?id=com.MultimediaStar.Mathimals&hl=en_IN&gl=US",icon:"icon18.png"},
+			        { url:"https://play.google.com/store/apps/details?id=com.HCMUS.Coding4Kids&hl=en_IN&gl=US",icon:"icon19.png"},
+			        { url:"https://play.google.com/store/apps/details?id=com.proj.game4english&hl=en_IN&gl=US",icon:"icon20.png"}
+			         ],
+			       8:[
+			        {url:"https://play.google.com/store/apps/details?id=com.Avocodeuk.MultiplicationbyAvokid&hl=en_IN&gl=US",icon:"icon21.png"},
+			        {url:"https://play.google.com/store/apps/details?id=com.ixionapps.montimulti&hl=en_IN&gl=US",icon:"icon22.png"},
+			        {url:"https://play.google.com/store/apps/details?id=com.playtic.monsternumbersFull&hl=en_IN&gl=US",icon:"icon24.png"}
+			         ],
+			       9:[
+			        {url:"https://play.google.com/store/apps/details?id=in.playsimple.wordsearch&hl=en_IN&gl=US",icon:"icon29.png"},
+					{url:"https://play.google.com/store/apps/details?id=fr.lehovetzki.ABMathlite&hl=en_IN&gl=US",icon:"icon31.png"},
+					{url:"https://play.google.com/store/apps/details?id=fr.lehovetzki.worddomino&hl=en_IN&gl=US",icon:"icon32.png"}
+			        ],
+			       10:[
+			        {url:"https://play.google.com/store/apps/details?id=com.syubestgames.teachersimulator&hl=en_IN&gl=US",icon:"icon26.png"},
+					{url:"https://play.google.com/store/apps/details?id=com.skc.readtome&hl=en_IN&gl=US",icon:"icon35.png"},
+					{url:"https://play.google.com/store/apps/details?id=hu.crabs.kidmaze&hl=en_IN&gl=US",icon:"icon37.png"}
+			        ],
+			       11:[
+			       {url:"https://play.google.com/store/apps/details?id=com.candywriter.explorer10&hl=en_IN&gl=US",icon:"icon28.png"},
+				   {url:"https://play.google.com/store/apps/details?id=com.arcsys.tictactoe&hl=en_IN&gl=US",icon:"icon38.png"},
+				   {url:"https://play.google.com/store/apps/details?id=com.dopuz.klotski.riddle&hl=en_IN&gl=US",icon:"icon39.png"}
+			         ],
+					 12:[
+			{url:"https://play.google.com/store/apps/details?id=com.ayasis.mentalup",icon:"icon40.png"},
+			{url:"https://play.google.com/store/apps/details?id=com.chesskid",icon:"icon41.png"},
+			{url:"https://play.google.com/store/apps/details?id=com.Octagon.Ocean4D",icon:"icon45.png"}
+			],
+			13:[
+			{url:"https://play.google.com/store/apps/details?id=com.learnyland.animals",icon:"icon42.png"},
+			{url:"https://play.google.com/store/apps/details?id=com.learnyland.HumanBody",icon:"icon43.png"},
+				{url:"https://play.google.com/store/apps/details?id=com.learnyland.space",icon:"icon44.png"}
+			],
+				14:[
+			{url:"https://play.google.com/store/apps/details?id=com.OctagonStudio.HoA4D",icon:"icon45.png"},
+			{url:"https://play.google.com/store/apps/details?id=com.OctagonStudio.ARDinoVR",icon:"icon46.png"}
+			
+			],
+				15:[
+			{url:"https://play.google.com/store/apps/details?id=air.com.eu.inove.sss2",icon:"icon47.png"},
+			{url:"https://play.google.com/store/apps/details?id=gov.nasa",icon:"icon48.png"}
+			],
+				16:[
+			{url:"https://play.google.com/store/search?q=hello+english&c=apps&hl=en_IN&gl=US",icon:"icon50.png"}
+			],
+			       17:[
+			       {url:"https://play.google.com/store/search?q=100%20years&c=apps&hl=en_IN&gl=US",icon:"icon27.png"}
+			       ],
+	
+                // Add more apps for other ages...
+            },
+            female: {
+             3: [
+                      { url: "https://play.google.com/store/apps/details?id=com.rvappstudios.abc_kids_toddler_tracing_phonics&hl=en_IN&gl=US", icon: "icon.png" },
+                        { url: "https://play.google.com/store/apps/details?id=com.rvappstudios.baby.toddler.kids.games.learning.activity&hl=en_IN&gl=US", icon: "icon2.png" },
+                        { url: "https://play.google.com/store/apps/details?id=com.rvappstudios.toddler.preschool.kids.learning.games&hl=en_IN&gl=US", icon: "icon3.png" },
+                        { url: "https://play.google.com/store/apps/details?id=com.iz.games.preschool.game.kindergarten.baby.children.kids.learning.educational.learn.toddler.puzzles.stories.coloring&hl=en_IN&gl=US", icon: "icon4.png" }
+                    ],
+                 
+					4:[
+					{ url:"https://play.google.com/store/apps/details?id=com.rvappstudios.kids.coloring.book.color.painting&hl=en_IN&gl=US",icon:"icon10.png" },
+					{ url:"https://play.google.com/store/apps/details?id=com.orange.coloring.learn.kids.animals&hl=en_IN&gl=US",icon:"icon11.png"},
+					{url:"https://play.google.com/store/apps/details?id=com.orange.kids.learn.spell.write.words&hl=en_IN&gl=US",icon:"icon12.png"}
+					],
+					5: [
+                        { url: "https://play.google.com/store/apps/details?id=com.rvappstudios.math.kids.counting&hl=en_IN&gl=US", icon: "icon5.png" },
+                        { url: "https://play.google.com/store/apps/details?id=com.rvappstudios.sight.words.phonics.reading.kids.games&hl=en_IN&gl=US", icon: "icon6.png" },
+                        { url: "https://play.google.com/store/apps/details?id=com.rvappstudios.abc.spelling.toddler.spell.phonics", icon: "icon7.png" }
+                    ],
+					6:[
+					{ url:"https://play.google.com/store/apps/details?id=com.yesgnome.kidobox&hl=en_IN&gl=US",icon:"icon16.png"},
+					{ url:"https://play.google.com/store/apps/details?id=com.strigiformgames.worldalphabet&hl=en_IN&gl=US",icon:"icon17.png"}
+					],
+					7:[
+					{url:"https://play.google.com/store/apps/details?id=com.HCMUS.Coding4Kids&hl=en_IN&gl=US",icon:"icon19.png"},
+					{url:"https://play.google.com/store/apps/details?id=com.proj.game4english&hl=en_IN&gl=US",icon:"icon20.png"},
+					{url:"https://play.google.com/store/apps/details?id=com.rvappstudios.jigsaw.puzzles.kids&hl=en_IN&gl=US",icon:"icon36.png"}
+			],
+			8:[
+			{url:"https://play.google.com/store/apps/details?id=com.ixionapps.montimulti&hl=en_IN&gl=US",icon:"icon22.png"},
+			{url:"https://play.google.com/store/apps/details?id=com.ixionapps.multiplication.addition.subtraction.division.charts&hl=en_IN&gl=US",icon:"icon23.png"},
+			{url:"https://play.google.com/store/apps/details?id=com.prodigygame.prodigy&hl=en_IN&gl=US",icon:"icon25.png"}
+			],
+				9:[
+			{url:"https://play.google.com/store/apps/details?id=in.playsimple.wordsearch&hl=en_IN&gl=US",icon:"icon29.png"},
+			{url:"https://play.google.com/store/apps/details?id=fr.lehovetzki.ABMathlite&hl=en_IN&gl=US",icon:"icon31.png"},
+			{url:"https://play.google.com/store/apps/details?id=fr.lehovetzki.worddomino&hl=en_IN&gl=US",icon:"icon32.png"}
+			],
+			10:[
+			{url:"https://play.google.com/store/apps/details?id=com.syubestgames.teachersimulator&hl=en_IN&gl=US",icon:"icon26.png"},
+			{url:"https://play.google.com/store/apps/details?id=teaching_com.reading_com&hl=en_IN&gl=US",icon:"icon33.png"},
+			{url:"https://play.google.com/store/apps/details?id=com.imagiration.readingteacher&hl=en_IN&gl=US",icon:"icon34.png"}
+			],
+
+			11:[
+			{url:"https://play.google.com/store/apps/details?id=com.candywriter.explorer10&hl=en_IN&gl=US",icon:"icon28.png"},
+			{url:"https://play.google.com/store/apps/details?id=com.arcsys.tictactoe&hl=en_IN&gl=US",icon:"icon38.png"},
+			{url:"https://play.google.com/store/apps/details?id=com.dopuz.klotski.riddle&hl=en_IN&gl=US",icon:"icon39.png"}
+			],
+			12:[
+			{url:"https://play.google.com/store/apps/details?id=com.ayasis.mentalup",icon:"icon40.png"},
+			{url:"https://play.google.com/store/apps/details?id=com.chesskid",icon:"icon41.png"},
+				{url:"https://play.google.com/store/apps/details?id=com.Octagon.Ocean4D",icon:"icon45.png"}
+			],
+			13:[
+			{url:"https://play.google.com/store/apps/details?id=com.learnyland.animals",icon:"icon42.png"},
+			{url:"https://play.google.com/store/apps/details?id=com.learnyland.HumanBody",icon:"icon43.png"},
+			{url:"https://play.google.com/store/apps/details?id=com.learnyland.space",icon:"icon44.png"}
+			],
+			14:[
+			{url:"https://play.google.com/store/apps/details?id=com.OctagonStudio.HoA4D",icon:"icon45.png"},
+			{url:"https://play.google.com/store/apps/details?id=com.OctagonStudio.ARDinoVR",icon:"icon46.png"}
+			
+			],
+			15:[
+			{url:"https://play.google.com/store/apps/details?id=air.com.eu.inove.sss2",icon:"icon47.png"},
+				{url:"https://play.google.com/store/apps/details?id=gov.nasa",icon:"icon48.png"},
+				{url:"https://play.google.com/store/apps/details?id=com.wobblemonkey.speedygram",icon:"icon49.png"}
+			],
+			16:[
+			{url:"https://play.google.com/store/search?q=hello+english&c=apps&hl=en_IN&gl=US",icon:"icon50.png"}
+			],
+			
+			17:[
+			{url:"https://play.google.com/store/search?q=100%20years&c=apps&hl=en_IN&gl=US",icon:"icon27.png"}
+			],
+                // Add more apps for other ages...
+            }
+        };
+
+        // Retrieve app data based on age and gender
+        const appInfo = appData[childGender][childAge] || [];
+
+        // Display app links with icons
+        const appLinksContainer = document.getElementById("appLinks");
+        appInfo.forEach(app => {
+            const link = document.createElement("a");
+            const img = document.createElement("img");
+            img.src = app.icon;
+            img.alt = "App Icon";
+            img.width = 48; // Set width to 48 pixels
+            img.height = 48; // Set height to 48 pixels
+            link.href = app.url;
+            link.className = "app-link";
+            link.appendChild(img);
+            appLinksContainer.appendChild(link);
+        });
+
+        // Display message if no apps available for the selected age and gender
+        if (appInfo.length === 0) {
+            document.getElementById("activityResult").textContent = "Sorry, no apps available for this age and gender.";
+        } else {
+            document.getElementById("activityResult").textContent = "";
+        }
+    }
+
+    function showAboutusMessage() {
+        alert("Our website helps parents guide their children with good games to improve their knowledge and use their time properly.");
+    }
+
+    function showSuggestionsMessage() {
+        alert("Website is trying to help children use their time efficiently. If you need to suggest any apps, please send them to phone number +918667627366.");
+    }
+
+    function moveSuggestionsNavItem() {
+        const suggestionsNavItem = document.getElementById("suggestionsNavItem");
+        suggestionsNavItem.style.marginRight = "-0px"; // Adjust margin as needed
+    }
+
+    // Attach the function to the "Suggestions" link
+    const suggestionsLink = document.getElementById("suggestionsLink");
+    suggestionsLink.addEventListener("click", showSuggestionsMessage);
+
+    const AboutusLink = document.getElementById("AboutusLink");
+    AboutusLink.addEventListener("click", showAboutusMessage);
+
+    window.onload = function() {
+        moveSuggestionsNavItem();
+    };
+</script>
+
+</body>
+</html>

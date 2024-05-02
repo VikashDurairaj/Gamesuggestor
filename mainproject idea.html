@@ -1,0 +1,103 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Login</title>
+  <style>
+    body {
+      font-family: 'georgia';
+      background-color: #edeff3;
+      background-size: cover;
+      background-position: center;
+      background-attachment: fixed;
+      text-align: center;
+      margin: 0;
+      padding: 0;
+    }
+  .logo {
+      position:absolute; /* Change 'fixed' to 'absolute' */
+      top: 20px;
+      right: 20px;
+      width: 75px;
+      height: auto;
+    }
+    .login-container {
+      position: relative; /* Add position relative for proper positioning of children */
+      display: flex;
+      justify-content: flex-end;
+      align-items: centre;
+      width: 400px;
+      margin-left: 700px ;
+	  margin-top: 200px;
+      padding: 20px;
+      background: #fff;
+      box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+      box-sizing: border-box;
+	
+    }
+    .login-form {
+      width: calc(100% - 10px);
+    }
+    .additional-content {
+      width: 600px;<!--calc(50% - 10px)-->;
+	    margin-left: 100px ;
+      text-align: left;
+      padding-left: 20px;
+      position: absolute;
+      left: 0;
+      top: 50%;
+      transform: translateY(-50%);
+    }
+    input[type="email"],
+    input[type="password"] {
+      width: calc(100% - 20px);
+      padding: 10px;
+      margin: 10px 0;
+      border: 1px solid #ddd;
+      box-sizing: border-box;
+    }
+    input[type="submit"] {
+      width: calc(100% - 20px);
+      padding: 10px;
+      background-color: #0056b3;
+      border: none;
+      color: white;
+      cursor: pointer;
+      box-sizing: border-box;
+    }
+    input[type="submit"]:hover {
+      background-color: #0056b3;
+    }
+	h1{
+	color: #0056b3;
+	font-size: 3rem;
+	}
+	h3{
+	font-size: 1.5rem;
+	}
+  </style>
+</head>
+<body>
+<div class="additional-content">
+  <h1 style="color: blue">Game suggestor</h1>
+  <h3>Explore the Games by your Age</h3>
+  <h3>Enter your personal details and start <br>your journey with us</h3>
+</div>
+<div class="login-container">
+  <div class="login-form">
+ 
+    <h2>Login</h2>
+    <form action="file:///C:/Users/ADMIN/Documents/nn.html" method="post">
+      <div>
+        <input type="email" placeholder="Enter Email" name="uname" required>
+      </div>
+      <div>
+        <input type="password" placeholder="Enter Password" name="psw" pattern="{1-6}" required>
+      </div>
+      <div>
+        <input type="submit" value="Login">
+      </div>
+    </form>
+  </div>
+</div>
+</body>
+</html>
